@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melatte - Café de Paso</title>
+    <meta name="description"
+        content="Melatte: Café artesanal de grano. Difusión del arte cafetero, cursos y eventos. Manuel Bulnes 542 | Genaro Gallo 2408. Jueves a domingo 17:00-22:00">
+    <style>
+        :root {
+            --color-base: #1e1a16;
+            --color-muted: #5f4a38;
+            --color-cream: #f4ece2;
+            --color-sand: #d9c6b1;
+            --color-light: #fff8f0;
+            --color-accent: #b88a5d;
+            --color-border: #e2d3c1;
+            --shadow: 0 20px 45px rgba(30, 26, 22, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8f3ec 0%, #efe6d8 100%);
+            color: var(--color-base);
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(184, 138, 93, 0.14), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(95, 74, 56, 0.12), transparent 20%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(244, 236, 226, 0.95);
+            border-bottom: 1px solid rgba(30, 26, 22, 0.08);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-base);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .menu-list {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .menu-list a {
+            color: var(--color-base);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.25s ease;
+        }
+
+        .menu-list a:hover {
+            color: var(--color-accent);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-copy {
+            padding: 1rem 0;
+        }
+
+        .hero-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-logo {
+            width: 130px;
+            height: auto;
+        }
+
+        .hero-copy p.lead {
+            max-width: 640px;
+            font-size: 1.05rem;
+            color: var(--color-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 1.75rem;
+            border-radius: 999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn {
+            background: var(--color-base);
+            color: var(--color-light);
+            box-shadow: 0 12px 30px rgba(30, 26, 22, 0.13);
+        }
+
+        .btn-secondary {
+            background: rgba(30, 26, 22, 0.06);
+            color: var(--color-base);
+        }
+
+        .btn:hover,
+        .btn-secondary:hover {
+            transform: translateY(-1px);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 0.98rem;
+            margin-bottom: 0.8rem;
+            color: var(--color-base);
+        }
+
+        .stat-card span {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .hero-visual {
+            min-height: 420px;
+            border-radius: 32px;
+            background: linear-gradient(180deg, rgba(248, 243, 236, 0.9) 0%, rgba(184, 138, 93, 0.12) 100%);
+            padding: 2rem;
+            display: grid;
+            place-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-visual .hero-card {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            border-radius: 28px;
+            padding: 2rem;
+            border: 1px solid rgba(30, 26, 22, 0.08);
+            box-shadow: 0 18px 35px rgba(30, 26, 22, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-placeholder {
+            width: 100%;
+            min-height: 280px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px dashed rgba(184, 138, 93, 0.35);
+            background: rgba(244, 236, 226, 0.9);
+            color: var(--color-muted);
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .hero-visual h2 {
+            margin-bottom: 1rem;
+            color: var(--color-base);
+        }
+
+        .hero-visual p {
+            color: var(--color-muted);
+            line-height: 1.8;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            margin-bottom: 1.75rem;
+            letter-spacing: 0.04em;
+            color: var(--color-base);
+        }
+
+        .section-intro {
+            margin: 0 auto 2rem;
+            max-width: 760px;
+            text-align: center;
+            color: var(--color-muted);
+            line-height: 1.8;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card,
+        .service-card,
+        .location-card,
+        .contact-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(30, 26, 22, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p,
+        .service-card p,
+        .location-card p,
+        .contact-card p {
+            color: var(--color-muted);
+            line-height: 1.8;
+        }
+
+        .menu-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .menu-panel .menu-card {
+            background: var(--color-light);
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .menu-display p {
+            margin-bottom: 0;
+        }
+
+        .menu-item-name {
+            font-size: 1.35rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-base);
+        }
+
+        .menu-item-price {
+            font-size: 1.6rem;
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1.3fr 0.9fr;
+            gap: 2rem;
+        }
+
+        .contact-form,
+        .contact-info {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(30, 26, 22, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--color-base);
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid rgba(30, 26, 22, 0.12);
+            padding: 1rem 1rem;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--color-base);
+            background: #fff;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(184, 138, 93, 0.12);
+        }
+
+        textarea {
+            min-height: 160px;
+            resize: vertical;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-card {
+            text-align: left;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1.25rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            color: white;
+            background: #25d366;
+            transition: background 0.2s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1dac59;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            color: var(--color-base);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            color: var(--color-muted);
+        }
+
+        .small {
+            color: var(--color-muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-panel,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                min-height: 360px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.25rem;
+            }
+
+            .menu-list {
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero {
+                padding-top: 3.5rem;
+                padding-bottom: 3rem;
+            }
+
+            .hero-copy h1 {
+                font-size: 2.75rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-copy p.lead {
+                font-size: 1rem;
+            }
+
+            .btn,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .menu-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-visual img,
+            .feature-card img,
+            .location-card img,
+            .menu-display img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="#inicio" class="logo"><img src="Me latte en estilo a pixel.png" alt="Melatte Logo"></a>
+            <ul class="menu-list">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#ubicacion">Locales</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero-copy">
+                <div class="hero-brand">
+                    <img src="Me latte en estilo a pixel.png" alt="Melatte logo" class="hero-logo">
+                </div>
+                <p class="lead">Un lugar para el café de grano</p>
+                <p class="lead">Cafeteria ofrece una carta pensada para quienes valoran un buen café en el paso, con
+                    opciones calientes, frías y repostería casera.</p>
+                <div class="hero-actions">
+                    <a href="#menu" class="btn">Ver Menú</a>
+                    <a href="#contacto" class="btn-secondary">Contacto</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <strong>Horario</strong>
+                        <span>Jue a Dom 17:00 - 22:00</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>Ubicación</strong>
+                        <span>--------------------</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card" style="padding: 0; overflow: hidden; border: none;">
+                    <img src="cafeteria.png" alt="Local Melatte"
+                        style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="nosotros">
+            <h2 class="section-title">Calidad y tradición</h2>
+            <p class="section-intro">Somos un espacio dedicado a la difusión del arte cafetero y sus derivados, con una
+                propuesta creada para disfrutar el mejor café en cada visita.</p>
+            <div class="cards-grid">
+                <div class="feature-card">
+                    <img src="Proyecto nuevo (5).png" alt="Café artesanal Melatte">
+                    <h3>Experiencia artesanal</h3>
+                    <p>Desde el grano hasta la taza, cada preparación se realiza con cuidado y técnicas propias del café
+                        artesanal.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Ambiente de paso</h3>
+                    <p>Un espacio pensado para quienes buscan una pausa breve y satisfactoria, con atención amable y
+                        servicio rápido.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="Proyecto nuevo (4).png" alt="Pasión por el café">
+                    <h3>Pasión por el café</h3>
+                    <p>Nuestra carta refleja el compromiso de ofrecer bebidas tradicionales y especialidades con
+                        personalidad propia.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="menu">
+            <h2 class="section-title">Menú destacado</h2>
+            <p class="section-intro">Selecciona tu producto preferido para ver detalles y conocer nuestros sabores más
+                populares.</p>
+            <div class="menu-panel">
+                <div class="menu-card">
+                    <div class="form-group">
+                        <label for="product">Selecciona un producto</label>
+                        <select id="product" onchange="updateMenu()">
+                            <option value="">Seleccione un producto</option>
+                            <optgroup label="Bebidas Calientes">
+                                <option
+                                    value="Espresso|1900|Un shot intenso y puro de café, perfecto para un impulso rápido.">
+                                    Espresso - $1.900</option>
+                                <option
+                                    value="Americano|2100|Café espresso diluido con agua caliente, suave y equilibrado.">
+                                    Americano - $2.100</option>
+                                <option value="Cappuccino|2500|Mezcla cremosa de espresso, leche vaporizada y espuma.">
+                                    Cappuccino - $2.500</option>
+                                <option
+                                    value="Latte|3000|Espresso con abundante leche vaporizada y una capa fina de espuma.">
+                                    Latte - $3.000</option>
+                                <option value="Mocaccino|3500|Latte con chocolate, cremoso y decadente.">Mocaccino -
+                                    $3.500</option>
+                                <option
+                                    value="Flat White|2800|Espresso con leche microespumada, suave y aterciopelado.">
+                                    Flat White - $2.800</option>
+                                <option
+                                    value="Chocolate Clásico|3000|Chocolate caliente tradicional, reconfortante y delicioso.">
+                                    Chocolate Clásico - $3.000</option>
+                                <option
+                                    value="Té de la Casa|2000|Té seleccionado cuidadosamente, relajante y aromático.">Té
+                                    de la Casa - $2.000</option>
+                            </optgroup>
+                            <optgroup label="Bebidas Frías">
+                                <option value="Latte Frío|3200|Latte refrescante servido sobre hielo.">Latte Frío -
+                                    $3.200</option>
+                                <option value="Frapuccino|3900|Bebida helada con hielo, leche y sabores intensos.">
+                                    Frapuccino - $3.900</option>
+                                <option value="Té Helado|2500|Té frío refrescante, ideal para días calurosos.">Té Helado
+                                    - $2.500</option>
+                            </optgroup>
+                            <optgroup label="Repostería">
+                                <option
+                                    value="Galleta Pequeña|800|Deliciosa galleta casera, crujiente por fuera y suave por dentro.">
+                                    Galleta Pequeña - $800</option>
+                                <option value="Galleta Media|1000|Galleta más grande para compartir o disfrutar solo.">
+                                    Galleta Media - $1.000</option>
+                                <option value="Galleta Grande|2000|Galleta generosa, perfecta para un antojo dulce.">
+                                    Galleta Grande - $2.000</option>
+                                <option
+                                    value="Pan de Pascua Ind.|1500|Pan dulce tradicional, ideal para ocasiones especiales.">
+                                    Pan de Pascua Ind. - $1.500</option>
+                                <option
+                                    value="Alfajoreo|800|Dulce argentino con dos galletas y relleno de dulce de leche.">
+                                    Alfajoreo - $800</option>
+                            </optgroup>
+                            <optgroup label="Extras">
+                                <option value="Leche|500|Adición de leche para personalizar tu bebida.">Leche - $500
+                                </option>
+                                <option value="Syrup|500|Jarabe para añadir sabor dulce a tus bebidas.">Syrup - $500
+                                </option>
+                                <option value="Carga de Espresso|1000|Shot extra de espresso para más intensidad.">Carga
+                                    de Espresso - $1.000</option>
+                            </optgroup>
+                            <optgroup label="Otros">
+                                <option value="Agua Mineral|1000|Agua fresca y pura para hidratarte.">Agua Mineral -
+                                    $1.000</option>
+                                <option value="Bebida 350cc|1500|Refresco en lata de 350cc, refrescante.">Bebida 350cc -
+                                    $1.500</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="menu-display" id="menuDisplay">
+                    <p style="color: var(--color-muted); font-style: italic;">Selecciona un producto para ver detalles.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="ubicacion">
+            <h2 class="section-title">Nuestros locales</h2>
+            <p class="section-intro">Visítanos en cualquiera de nuestras ubicaciones y vive la experiencia Melatte con
+                café de grano y atención cordial.</p>
+            <div class="cards-grid">
+                <div class="location-card">
+                    <h3>----------- 642</h3>
+                    <p>Una parada ideal para quienes buscan un café de calidad en un ambiente cómodo.</p>
+                </div>
+                <div class="location-card">
+                    <h3>------------- 7608</h3>
+                    <p>Frente a ---, con atención pensada para tu pausa de paso.</p>
+                </div>
+                <div class="location-card">
+                    <h3>Horario</h3>
+                    <p>Jueves a Domingo 17:00 - 22:00</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contacto">
+            <h2 class="section-title">Contacto</h2>
+            <p class="section-intro">Escríbenos si quieres preguntar por reservas, productos o tu próximo pedido.</p>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3>Envíanos tu mensaje</h3>
+                    <form id="contactForm" onsubmit="return handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos tu consulta..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>WhatsApp</h3>
+                        <p>Contacta directamente para consultas rápidas o reservas.</p>
+                        <a href="https://wa.me/56912345678?text=Hola%20Melatte%2C%20me%20gustar%C3%ADa%20consultar..."
+                            class="whatsapp-btn" target="_blank">Enviar mensaje</a>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Dirección</h3>
+                        <p><strong>----------------</strong><br>---------------</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Horario</h3>
+                        <p><strong>Jueves a Domingo</strong><br>17:00 - 22:00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Melatte</strong> Café de paso</p>
+        <p class="small">Experiencia artesanal para tus momentos de paso.</p>
+        <p class="small"> 2026 Melatte. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function updateMenu() {
+            const select = document.getElementById('product');
+            const display = document.getElementById('menuDisplay');
+            const selectedValue = select.value;
+
+            if (selectedValue) {
+                const [name, price, desc] = selectedValue.split('|');
+                display.innerHTML = `
+                    <div class="menu-item-name">${name}</div>
+                    <div class="menu-item-price">$${price}</div>
+                    <p style="margin-top: 1rem; color: var(--color-muted); font-size: 0.95rem;">${desc}</p>
+                `;
+            } else {
+                display.innerHTML = '<p style="color: var(--color-muted); font-style: italic;">Selecciona un producto para ver detalles.</p>';
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            alert(`¡Gracias ${nombre}! Tu mensaje ha sido recibido. Nos contactaremos pronto.`);
+            document.getElementById('contactForm').reset();
+            return false;
+        }
+
+        function smoothScroll(target, duration = 400) {
+            const targetElement = document.querySelector(target);
+            if (!targetElement) return;
+
+            const start = window.pageYOffset;
+            const end = targetElement.getBoundingClientRect().top + start;
+            const distance = end - start;
+            const startTime = performance.now();
+
+            function easeOutCubic(t) {
+                return 1 - Math.pow(1 - t, 3);
+            }
+
+            function scrollFrame(currentTime) {
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                const eased = easeOutCubic(progress);
+                window.scrollTo(0, start + distance * eased);
+
+                if (progress < 1) {
+                    requestAnimationFrame(scrollFrame);
+                }
+            }
+
+            requestAnimationFrame(scrollFrame);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href === '#' || href === '') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    event.preventDefault();
+                    smoothScroll(href, 350);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

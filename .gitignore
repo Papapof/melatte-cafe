@@ -1,0 +1,7 @@
+# Ignore original archive files that are not needed in the source repository
+*.zip
+
+# Common editor/temp files
+.DS_Store
+Thumbs.db
+/doodleCH/
